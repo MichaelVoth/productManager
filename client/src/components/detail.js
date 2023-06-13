@@ -20,7 +20,7 @@ const Detail = (props) => {
             <h1>{product.title}</h1>
             <p>Price: ${product.price}</p>
             <p>Description: {product.description}</p>
-            <a href="/products">Go Back</a>
+            <a href="/products">Go Back</a> | <a href={`/products/edit/${product._id}`}>Edit</a>
         </div>
     )
 }

@@ -27,3 +27,15 @@ module.exports.findOneProduct = (request, response) => { // findOneProduct metho
         .then(oneProduct => response.json(oneProduct)) // if successful, send the newly found product object back as JSON
         .catch(err => response.json(err)); // if there's an error, send it back as JSON
 }
+
+module.exports.updateProduct = (request, response) => { // updateProduct method to find a single product by ID and update it
+    Product.findOneAndUpdate({ _id: request.params.id }, request.body, { new: true }) // use the findOneAndUpdate method on our Product model to find one product by it's _id and update it with the data from request.body
+    .then(updatedProduct => response.json(updatedProduct)) // if successful, send the newly updated product object back as JSON
+    .catch(err => response.status(400).json(err)); // if there's an error, send it back as JSON
+}
+
+module.exports.deleteProduct = (request, response) => { // deleteProduct method to find a single product by ID and delete it
+    Product.deleteOne({ _id: request.params.id }) // use the deleteOne method on our Product model to find one product by it's _id and delete it
+        .then(deleteConfirmation => response.json(deleteConfirmation)) // if successful, send the deleted product object back as JSON
+        .catch(err => response.json(err)); // if there's an error, send it back as JSON
+}
