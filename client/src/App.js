@@ -1,13 +1,19 @@
-
-import ProductForm from './components/productForm';
+import React from 'react';
 import './App.css';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import Main from './views/main';
+import Detail from './components/detail'
+
 
 function App() {
   return (
     <div className="App">
-      <h1>Product Manager</h1>
-      <ProductForm />
-      <a href="http://localhost:3000/api/products">View All Products</a>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/products" element={<Main />} default/>
+          <Route path="products/:id" element={<Detail />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
