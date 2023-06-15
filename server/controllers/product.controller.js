@@ -13,7 +13,7 @@ module.exports.findAllProducts = (request, response) => { // index method to dis
         .catch(err => {
             console.log(err);
             response.json(err)
-        }); // if there's an error, send it back as JSON
+        }); // if there's an error, send it back as JSON 
 }
 
 module.exports.createProduct = (request, response) => { // createProduct method to create a new product
