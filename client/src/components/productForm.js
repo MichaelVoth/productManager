@@ -1,44 +1,30 @@
-import React, {useState} from 'react';
-import axios from 'axios';
+import React from 'react';
+
 
 const ProductForm = (props) => {
-    const {products, setProducts} = props;
-    const [title, setTitle] = useState("");
-    const [price, setPrice] = useState(0);
-    const [description, setDescription] = useState("");
+    const { product, setProduct, onSubmitProp } = props;
 
-    const onSubmitHandler = (e) => { // This function is called when the form is submitted
-        e.preventDefault(); // Prevents the default refresh of the browser
-        axios.post('http://localhost:8000/api/products', { // Make a POST request to create a new product
-            title, // The title state variable
-            price, // The price state variable
-            description // The description state variable
-        })
-            .then(res => { // If successful, do something with the response. In this case, add the new product to the products array
-                console.log(res); // Log the response object to the console to see what you get back
-                setProducts([...products, res.data]);
-            })
-            .catch(err => console.log(err))
-        setTitle(""); // Reset the title state variable to be an empty string
-        setPrice(0);
-        setDescription("");
+    const onChangeHandler = (e) => {
+        setProduct({
+            ...product,
+            [e.target.name]: e.target.value
+        });
     }
 
     return (
         <div>
-            <h1>Product Manager</h1>
-            <form onSubmit={onSubmitHandler}> {/* When the form is submitted, call the onSubmitHandler function */}
+            <form onSubmit={onSubmitProp}> {/* When the form is submitted, call the onSubmitProp function */}
                 <p>
                     <label>Title</label><br/>
-                    <input type="text" onChange={(e) => setTitle(e.target.value)} value={title}/> {/* Set the value of the title state variable to be the value of the input field */}
+                    <input type="text" name="title" onChange={onChangeHandler} value={product.title}/> {/* Set the value of the title state variable to be the value of the input field */}
                 </p>
                 <p>
                     <label>Price</label><br/>
-                    <input type="number" onChange={(e) => setPrice(e.target.value)} value={price}/> {/* Set the value of the price state variable to be the value of the input field */}
+                    <input type="number" name="price" onChange={onChangeHandler} value={product.price}/> {/* Set the value of the price state variable to be the value of the input field */}
                 </p>
                 <p>
                     <label>Description</label><br/>
-                    <input type="text" onChange={(e) => setDescription(e.target.value)} value={description}/> {/* Set the value of the description state variable to be the value of the input field */}
+                    <input type="text" name="description" onChange={onChangeHandler} value={product.description}/> {/* Set the value of the description state variable to be the value of the input field */}
                 </p>
                 <input type="submit"/>
             </form>

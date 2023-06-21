@@ -1,19 +1,10 @@
 import React, { useEffect} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-
+import DeleteButton from './deleteButton';
 
 const ProductList = (props) => {
     const {products, setProducts, removeFromDom} = props; 
-
-
-    const deleteProduct = (productId) => { // Function to delete a product
-        axios.delete(`http://localhost:8000/api/products/${productId}`) // Send the delete request to the server
-            .then(res => { // If the request is successful...
-                removeFromDom(productId); // Use the removeFromDom function passed as a prop to remove the deleted product from the DOM
-            })
-            .catch(err => console.log(err)); // If the request is unsuccessful, log the error to the console
-    }
 
     useEffect(() => { // When the component is first rendered...
         axios.get('http://localhost:8000/api/products') // Send a get request to the server
@@ -46,7 +37,9 @@ const ProductList = (props) => {
                                     </Link></td>
                                 <td>{product.price}</td>
                                 <td>{product.description}</td>
-                                <td><button onClick={(e)=> {deleteProduct(product._id)}}>Delete</button></td> {/* Button to delete the product */}
+                                <td>
+                                    <DeleteButton productId={product._id} successCallback={() => removeFromDom(product._id)} />
+                                </td> {/* DeleteButton component */}
                             </tr>
                         )
                     }
@@ -55,4 +48,4 @@ const ProductList = (props) => {
         </div>
     )
 }
-export default ProductList;
+export default ProductList; 
