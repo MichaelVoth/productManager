@@ -5,7 +5,7 @@ import ProductList from '../components/productList';
 
 const Main = (props) => {
     const [products, setProducts] = useState([]); // State for list of products
-    const [product, setProduct] = useState({title: "", price: 0, description: ""}); // State for the product form
+    const [product, setProduct] = useState({title: "", price: 0, description: ""}); // This is to store the form data
 
     const removeFromDom = productId => { // Function to remove a product from the DOM
         setProducts(products.filter(product => product._id !== productId)); // Filter out the product with the matching ID and return a new array without that product

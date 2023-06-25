@@ -4,10 +4,10 @@ import React from 'react';
 const ProductForm = (props) => {
     const { product, setProduct, onSubmitProp } = props;
 
-    const onChangeHandler = (e) => {
-        setProduct({
-            ...product,
-            [e.target.name]: e.target.value
+    const onChangeHandler = (e) => { // Function to update the state variable when the input field is changed
+        setProduct({ // Set the state variable to be the value of the input field
+            ...product, // Spread operator to keep the other values in the state variable
+            [e.target.name]: e.target.value // Set the value of the input field to be the value of the state variable
         });
     }
 

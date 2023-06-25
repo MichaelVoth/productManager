@@ -7,8 +7,8 @@ import DeleteButton from "./deleteButton";
 const Update = (props) => {
     const { id } = useParams(); // this is grabbing the id from the url
 
-    const [product, setProduct] = useState({title: "", price: "", description: ""});
-    const [loaded, setLoaded] = useState(false);
+    const [product, setProduct] = useState({title: "", price: "", description: ""}); 
+    const [loaded, setLoaded] = useState(false); // this is used to make sure the product has been loaded from the database before displaying the form
 
     const navigate = useNavigate(); // this is used to navigate to a different route
 
